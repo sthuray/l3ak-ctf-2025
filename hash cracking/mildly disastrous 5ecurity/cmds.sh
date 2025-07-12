@@ -10,5 +10,7 @@ if [ ! -f "$WORDLIST" ]; then
   fi
 fi
 
-hashcat -m 0 -a 0 hashes.txt "$WORDLIST"
-hashcat -m 0 -a 0 hashes.txt "$WORDLIST" --show > hashes.out
+hashcat -m 0 -a 0 hashes.txt "$WORDLIST" --quiet --show > hashes.out
+
+passwords=$(cut -d: -f2 hashes.out | tr '\n' '_' | sed 's/_$//')
+echo "L3AK{$passwords}"
